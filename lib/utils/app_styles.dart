@@ -6,13 +6,23 @@ class AppTheme {
   static const backgroundStartColor = Color(0xFFFFFFFF);
   static const backgroundEndColor = Color(0xFFFEFEFE);
 
-  static const accent=Color(0xFF05B0FE);
+  static const accent = Color(0xFF05B0FE);
 
-  static const sidebarText=TextStyle(
+  static const sidebarText = TextStyle(
     color: Colors.white,
   );
-  
-  static final filepathButtonStyle=TextButton.styleFrom(
-    
+
+  static const propertiesTextStyle = TextStyle(
+    fontSize: 20,
+  );
+  static const titleTextStyle=TextStyle(
+    fontSize: 25,
+    color: accent,
+    fontWeight: FontWeight.bold
+  );
+  static const TextStyle splashStyle = TextStyle(
+    color: accent,
+    fontSize: 60,
+    fontWeight: FontWeight.w500,
   );
 }

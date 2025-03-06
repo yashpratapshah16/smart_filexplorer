@@ -2,6 +2,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
 import 'package:smart_filexplorer/components/file_explorer.dart';
 import 'package:smart_filexplorer/components/file_path.dart';
+import 'package:smart_filexplorer/components/operators.dart';
 import 'package:smart_filexplorer/utils/app_styles.dart';
 
 class RightSide extends StatelessWidget {
@@ -28,7 +29,11 @@ class RightSide extends StatelessWidget {
             WindowTitleBarBox(
               child: Row(
                 children: [
-                  Expanded(child: MoveWindow()),
+                  Expanded(child: MoveWindow(
+                    child: Center(
+                      child: Text("Smart FileXplorer",style:AppTheme.titleTextStyle,),
+                    ),
+                  )),
                   const WindowButtons()
                 ],
               ),
@@ -38,6 +43,8 @@ class RightSide extends StatelessWidget {
               children: [
                 Divider(),
                 FilePath(),
+                Divider(),
+                Operators(),
                 Divider(),
                 Expanded(
                   child: FileExplorer(),

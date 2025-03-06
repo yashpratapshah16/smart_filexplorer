@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Button {
-  Material actionButton(Function()? onTap, IconData icon,{bool disable=true}) {
+  Material actionButton(
+    Function()? onTap,
+    IconData icon,
+    String message, {
+    bool disable = false,
+    Color hoverColor = Colors.grey,
+    Color color = Colors.white,
+  }) {
     return Material(
       color: Colors.transparent,
       type: MaterialType.button,
@@ -9,13 +16,16 @@ class Button {
       borderOnForeground: true,
       elevation: 0,
       child: InkWell(
-        hoverColor: Colors.grey,
-        onTap:disable?onTap:null,
+        hoverColor: hoverColor,
+        onTap: disable ? null : onTap,
         child: Container(
           margin: EdgeInsets.all(2.0),
-          child: Icon(
-            icon,
-            color: Colors.white,
+          child: Tooltip(
+            message:disable?"":message,
+            child: Icon(
+              icon,
+              color:disable?Colors.grey:color,
+            ),
           ),
         ),
       ),

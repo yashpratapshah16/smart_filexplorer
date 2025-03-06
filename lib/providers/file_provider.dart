@@ -25,11 +25,10 @@ class FileProvider extends ChangeNotifier {
     return filteredEntities;
   }
 
-   bool _isHiddenFile(String path) {
+  bool _isHiddenFile(String path) {
     final attributes = GetFileAttributes(path.toNativeUtf16());
     return attributes & FILE_FLAGS_AND_ATTRIBUTES.FILE_ATTRIBUTE_HIDDEN != 0;
   }
-
 
   Future<List<String>> listOnlyFolders(String directoryPath) async {
     List<FileSystemEntity> files = await listFiles(directoryPath);
@@ -43,11 +42,46 @@ class FileProvider extends ChangeNotifier {
   }
 
   List<FileSystemEntity> files = [];
-  String currentPath = r"C:\";
+  String currentPath = r"C:";
   List<String> frontPath = [];
   List<String> backPath = [];
   int count = 0;
   bool reset = false;
+  String selectedPath = "";
+  bool copyOrNOt=false;
+  int selectedIndex=-1;
+  bool selectedFile=false;
+  bool isGrid=false;
+
+  void setView(bool val){
+    isGrid=val;
+    notifyListeners();
+  }
+
+  void setSelectedIndex(int value){
+    selectedIndex=value;
+    notifyListeners();
+  }
+  void resetSelecteIndex(){
+    selectedIndex=-1;
+    notifyListeners();
+  }
+
+  void setSelectedFile(bool value){
+    selectedFile=value;
+    notifyListeners();
+  }
+
+  void setSelectedPath(String path,bool copy) {
+    selectedPath = path;
+    copyOrNOt=copy;
+    notifyListeners();
+  }
+  void resetSelectedPath() {
+    selectedPath = "";
+    copyOrNOt=false;
+    notifyListeners();
+  }
 
   List<String> filePath(String path) {
     if (path == r"C:\") {
@@ -79,8 +113,9 @@ class FileProvider extends ChangeNotifier {
       if (count != 0) {
         reset = true;
       }
-      currentPath = path;
+      currentPath = path == r"C:\" ? "C:" : path;
       files = newfiles;
+      selectedFile=false;
       count++;
       notifyListeners();
     }
@@ -100,6 +135,7 @@ class FileProvider extends ChangeNotifier {
       if (count != 0) {
         reset = true;
       }
+      selectedFile=false;
       count--;
       notifyListeners();
     }
@@ -115,6 +151,7 @@ class FileProvider extends ChangeNotifier {
       if (count != 0) {
         reset = true;
       }
+      selectedFile=false;
       count++;
       notifyListeners();
     }
