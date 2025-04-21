@@ -536,6 +536,13 @@ class _OperatorsState extends State<Operators> {
               )
             ],
           ),
+          button.actionButton(
+            () => context.read<FileProvider>().setSearch(true),
+            Icons.search,
+            "Search",
+            hoverColor: AppTheme.accent,
+            color: Colors.black,
+          )
         ],
       ),
     );

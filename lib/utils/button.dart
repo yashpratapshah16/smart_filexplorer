@@ -8,6 +8,7 @@ class Button {
     bool disable = false,
     Color hoverColor = Colors.grey,
     Color color = Colors.white,
+    Color bgColor= Colors.transparent,
   }) {
     return Material(
       color: Colors.transparent,
@@ -19,12 +20,13 @@ class Button {
         hoverColor: hoverColor,
         onTap: disable ? null : onTap,
         child: Container(
+          color: bgColor,
           margin: EdgeInsets.all(2.0),
           child: Tooltip(
-            message:disable?"":message,
+            message: disable ? "" : message,
             child: Icon(
               icon,
-              color:disable?Colors.grey:color,
+              color: disable ? Colors.grey : color,
             ),
           ),
         ),

@@ -53,6 +53,14 @@ class FileProvider extends ChangeNotifier {
   bool selectedFile=false;
   bool isGrid=false;
 
+  bool isSearch=false;
+
+  void setSearch(bool val){
+    isSearch=val;
+    notifyListeners();
+  }
+
+
   void setView(bool val){
     isGrid=val;
     notifyListeners();

@@ -182,14 +182,30 @@ class Operations {
       newname += ".${name.split(".").last}";
       try {
         File rename = File("$path${Platform.pathSeparator}$name");
-        await rename.rename("$path${Platform.pathSeparator}$newname");
-        SnackbarUtils.showSnackbar(context, Icons.error, "File Renamed.");
+        File newFile = File("$path${Platform.pathSeparator}$newname");
+
+        if (newFile.existsSync()) {
+          SnackbarUtils.showSnackbar(context, Icons.error,
+              "Cannot Rename to this Name It Aleredy exists");
+        } else {
+          await rename.rename("$path${Platform.pathSeparator}$newname");
+          SnackbarUtils.showSnackbar(context, Icons.error, "File Renamed.");
+        }
       } catch (e) {
         SnackbarUtils.showSnackbar(context, Icons.error, "Error Accured!");
       }
     } else {
       try {
         Directory rename = Directory("$path${Platform.pathSeparator}$name");
+        Directory newdir = Directory("$path${Platform.pathSeparator}$newname");
+
+        if (newdir.existsSync()) {
+          SnackbarUtils.showSnackbar(context, Icons.error,
+              "Cannot Rename to this Name It Aleredy exists");
+        } else {
+          await rename.rename("$path${Platform.pathSeparator}$newname");
+          SnackbarUtils.showSnackbar(context, Icons.error, "File Renamed.");
+        }
         await rename.rename("$path${Platform.pathSeparator}$newname");
         SnackbarUtils.showSnackbar(context, Icons.error, "Folder Renamed.");
       } catch (e) {

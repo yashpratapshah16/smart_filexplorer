@@ -90,8 +90,6 @@ bool checkFolder(String path) {
     return true;
   } else if (path == r"C:\Recovery") {
     return true;
-  } else if (path == r"C:\Recovery") {
-    return true;
   } else if (path == r"C:\Intel") {
     return true;
   } else if (path == r"C:\AMD") {
@@ -127,7 +125,7 @@ class _FileExplorerState extends State<FileExplorer> {
   @override
   void initState() {
     super.initState();
-    context.read<FileProvider>().loadFiles(r"C:");
+    context.read<FileProvider>().loadFiles(context.read<FileProvider>().currentPath);
   }
 
   @override
@@ -187,11 +185,6 @@ class _FileExplorerState extends State<FileExplorer> {
                   true,
                   context,
                 );
-                SnackbarUtils.showSnackbar(
-                  context,
-                  Icons.edit_square,
-                  "File Renamed.",
-                );
               } else {
                 await Operations.renameEntity(
                   currentFiles[_selectedindex].parent.path,
@@ -199,11 +192,6 @@ class _FileExplorerState extends State<FileExplorer> {
                   nameController.text,
                   false,
                   context,
-                );
-                SnackbarUtils.showSnackbar(
-                  context,
-                  Icons.edit_square,
-                  "Folder Renamed.",
                 );
               }
               context

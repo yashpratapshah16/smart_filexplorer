@@ -1,8 +1,11 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smart_filexplorer/components/file_explorer.dart';
 import 'package:smart_filexplorer/components/file_path.dart';
 import 'package:smart_filexplorer/components/operators.dart';
+import 'package:smart_filexplorer/providers/file_provider.dart';
+import 'package:smart_filexplorer/screens/search.dart';
 import 'package:smart_filexplorer/utils/app_styles.dart';
 
 class RightSide extends StatelessWidget {
@@ -38,19 +41,22 @@ class RightSide extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
-                child: Column(
-              children: [
-                Divider(),
-                FilePath(),
-                Divider(),
-                Operators(),
-                Divider(),
-                Expanded(
-                  child: FileExplorer(),
-                ),
-              ],
-            )),
+            context.watch<FileProvider>().isSearch
+                ? Expanded(child: Search()) 
+                : Expanded(
+                    child: Column(
+                      children: [
+                        Divider(),
+                        FilePath(),
+                        Divider(),
+                        Operators(),
+                        Divider(),
+                        Expanded(
+                          child: FileExplorer(),
+                        ),
+                      ],
+                    ),
+                  ),
           ],
         ),
       ),
